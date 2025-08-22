@@ -11,11 +11,15 @@
   "author": "Uche Oranye",
   "license": "MIT",
   "dependencies": {
+    "connect-flash": "^0.1.1",
+    "connect-pg-simple": "^10.0.0",
     "dotenv": "^17.2.1",
     "ejs": "^3.1.10",
     "express": "^5.1.0",
     "express-async-handler": "^1.2.0",
     "express-ejs-layouts": "^2.5.1",
+    "express-messages": "^1.0.1",
+    "express-session": "^1.18.2",
     "mongodb": "^6.18.0",
     "mongoose": "^8.17.1"
   },

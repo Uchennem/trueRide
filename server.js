@@ -9,9 +9,17 @@ const inventoryRoute = require("./routes/inventoryRoutes")
 const errorRoute = require("./routes/errorRoute")
 const connectDb = require('./mongoDb/dbConnection');
 const errorHandler = require('./middleware/errorHandler')
+const session = require("express-session")
 
 //connect Db
 connectDb();
+
+// Express Messages Middleware
+app.use(require('connect-flash')())
+app.use(function(req, res, next){
+  res.locals.messages = require('express-messages')(req, res)
+  next()
+})
 
 //View Engine and Templates
 app.set('view engine', 'ejs');

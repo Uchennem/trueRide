@@ -1,0 +1,28 @@
+<div class="invManagement">
+    <h1>True Ride Motors Management Portal</h1>
+     <%# messages() %>
+    <ul class="management_ul">
+        <li>
+            <a href="/inv/addClassification" title="Click to add new classification">Add New Classification</a>
+        </li>
+        <li>
+            <a href="/inv/addInventory" title="Click to add new vehicle">Add New Vehicle</a>
+        </li>
+    </ul>
+    
+    <h2>Manage Inventory</h2>
+    <p>Please Select Classification from list to see items belonging to classification</p>
+
+    <div class="management_dropdown">
+
+        <label for="classificationList">Select Classification:</label>
+        <select id="classificationList" name="classificationList">
+          <%- classificationSelect %> <!-- This will render the <option> tags -->
+        </select>
+      </div>
+     
+    <table id="inventoryDisplay"></table>
+</div>
+
+<noscript>JavaScript must be enabled to use this page.</noscript>
+<script src="/js/inventory.js"></script>

@@ -112,6 +112,22 @@ Util.buildVehicleDetails = async function(vehicle) {
   return content;
 }
 
+/* ***************************
+ *  Build Classifications Management view
+ * ************************** */
+ Util.buildClassificationList = (data, selectedId = null) => {
+  let options = '<option value="" disabled>Select a classification</option>'; // Add placeholder
+
+  // Use forEach to iterate over each item in the data array
+  data.forEach((element) => {
+    // Check if this option should be selected, but only if selectedId is provided
+    const isSelected = selectedId && element.classification_id === selectedId ? 'selected' : '';
+    options += `<option value="${element.classification_id}" ${isSelected}>${element.classification_name}</option>`;
+  });
+
+  // Return the final string with all <option> elements
+  return options;
+};
 
 /*****************************************
 * Middleware For Handling Errors
