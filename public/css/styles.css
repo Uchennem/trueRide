@@ -1,0 +1,714 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Open+Sans&display=swap');
+
+/******* Change Box Model ***************/
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: Lato, monospace, sans-serif;
+  font-weight: bolder;
+}
+
+body {
+  font-family: "Open Sans", monospace, sans-serif; 
+}
+
+
+.container {
+  background-color: #fff;
+  max-width: 1200px;
+  border-radius: 10px;
+}
+
+#top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#top-header a {
+  color: black; 
+  text-decoration: none;
+  font-weight: bold; 
+}
+
+.siteName {
+  font-size: 2rem;
+} 
+
+#navtoggle {
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: white;
+  display: block;
+  width: 100%;
+  text-align: right;
+  background-color:  #292929;
+}
+
+nav.hidden {
+  display: none;
+}
+
+nav {
+  background-color: #292929;
+  font-size: 1.5rem;
+  
+}
+
+nav ul{
+  margin: 0;
+  padding: 2px;
+  display:  flex;
+  flex-direction: column;
+  justify-content: space-between;
+  list-style-type: none;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: white;
+}
+
+nav ul li a:active {
+  background-color: #741919; /* Changes on click */
+}
+
+.firstHalf_main {
+  position: relative;
+}
+
+.firstHalf_main h1 {
+  position: absolute;
+  font-size: 1.4rem;
+  margin-left: 3%;
+}
+
+.hero_img {
+  padding-top: 70px;
+  text-align: center;
+}
+
+.hero_img img {
+  width: 65vw ;
+}
+
+
+
+.dmc_del {
+  text-align: left;
+  padding: 7px;
+  background-color:white; 
+  margin-right: 60%;
+  opacity: 0.8;
+  position: absolute;
+  top: 19%;
+  left: 7%;
+
+}
+
+.dmc_del p {
+  color: #741919;
+  font-size: small;
+  font-weight: bold;
+}
+
+#dmc_header {
+  font-weight: bolder;
+  font-size: medium;
+}
+
+#own_today {
+  background-color: #741919;
+  width: 7em;
+  font-weight: bolder;
+  padding: 0.5em 0em;
+  border-radius: 1.3em;
+  cursor: pointer;
+  color: white;
+}
+
+.secondHalf {
+  margin-top: 20px;
+}
+
+.upgrade_divs {
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 15px 20px -5px;
+}
+
+.reviews, .upgrades {
+  border: 2px solid #741919;
+  padding: 1%;
+  margin-bottom: 10px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 15px 20px -5px;
+  margin-left: 3%;
+  margin-right: 3%;
+}
+
+.reviews {
+display: flex;
+flex-direction: column;
+justify-content: space-around;
+}
+
+.del_rev_link {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  justify-items: left;
+  height: 100%;
+}
+
+.del_upg_img {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  text-align: center;
+  gap: 23px 30px;
+  padding: 20px;
+  padding-top: 0;
+}
+
+.del_upg_img a {
+  display: block;
+}
+
+.upg_img  {
+  background-color: #741919;
+  display: flex;
+  height: 6rem;
+  justify-content: center;
+  align-items: center;background-color: #741919;
+}
+
+.upg_img img {
+  width: 50%;
+  height: 75%;
+}
+
+/* Styling for Classifications View */
+#classification_header { 
+  font-size: 2.0rem;
+  text-align: center;
+  color: #741919;
+}
+
+#inv-display {
+  max-width: 85%;
+  list-style: none;
+  text-align: center;
+}
+
+#inv-display li {
+  box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.1); 
+  padding: 10px;
+  margin: 4%;
+}
+
+/* CSS Associated with error Page */
+
+#errorDiv {
+  margin: 5%;
+}
+
+.funnyDiv {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: center;
+  align-items: center;
+}
+
+#errorImage {
+  width: 50%;
+  border-radius: 45%;
+}
+
+/* Styling for Vehicle Details Div */
+#vehicle_details {
+  margin: 5%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+
+#vehicle_description {
+  box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.1); 
+  padding: 5%;
+}
+
+#vehicle_details img {
+  width: 70%;
+  box-shadow: 6px 8px 15px rgba(0, 0, 0, 0.1); 
+}
+
+.vehicleNumbers h2 {
+  font-size: 1.5rem;
+  font-weight: normal;
+}
+
+#vehicle_para {
+  color: #741919;
+  font-weight: bolder;
+}
+
+/* 
+  Styling for management view
+*/
+
+.invManagement {
+  margin: 0 auto;
+  max-width: 800px;
+}
+
+.invManagement h1{
+  color: #741919;
+  text-align: center;
+}
+
+.invManagement h2{
+  text-align: center;
+}
+ 
+.management_ul {
+  list-style: none;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  justify-content: space-between;
+  padding: 0;
+}
+
+.management_ul li {
+  display: flex;
+  text-align: center;
+}
+
+.management_ul li a{
+  background: black;
+  padding: 5px;
+  width: 150px;
+  border: 1px solid white;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 50px black inset;
+  color: #fff;
+  text-decoration: none;
+  padding: 12px;
+  }
+  
+.management_ul li a:hover {
+  box-shadow: 0 0 black inset;
+  color: black;
+  font-weight: bolder;
+  border-color: black;
+  text-transform: capitalize;
+  background-color: white;
+}
+
+.management_ul li a:focus {
+  outline: none;
+}
+ 
+
+.management_dropdown {
+  margin: 0 auto;
+  text-align: center;
+
+}
+
+#classificationList {
+  width: 45%;
+}
+
+/* General table styling */
+#inventoryDisplay {
+  width: 100%;
+  border-collapse: collapse; /* Collapse borders for neatness */
+  margin: 0 auto;
+  margin-top: 5%;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+}
+
+/* Table header styling */
+#inventoryDisplay thead {
+  background-color: #333;
+  color: white;
+}
+
+#inventoryDisplay th {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+#inventoryDisplay td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+#inventoryDisplay tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#inventoryDisplay tbody tr:hover {
+  background-color: #d1e0e0;
+  cursor: pointer;
+}
+
+/* Styling for the Modify and Delete links */
+#inventoryDisplay a {
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: white;
+}
+
+#inventoryDisplay a:hover {
+  opacity: 0.8;
+}
+
+#inventoryDisplay a[title="Click to update"] {
+  background-color: #4CAF50; /* Green for Modify */
+}
+
+#inventoryDisplay a[title="Click to delete"] {
+  background-color: #f44336; /* Red for Delete */
+}
+
+.notice li {
+  color: #f44336;
+  font-weight: bold;
+}
+
+/* Responsive table */
+@media (max-width: 768px) {
+  #inventoryDisplay th, #inventoryDisplay td {
+    padding: 8px;
+  }
+}
+
+/* Delete confirm CSS */
+.deletePara {
+  color: #741919;
+  font-weight: bold;
+}
+
+
+
+@media screen and (min-width: 800px) {
+  
+  /* Main image and associates divs */
+
+  body {
+    background-image: url('../images/site/checkerboard.jpg'); 
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    height: 100%;
+  }
+
+  .container {
+    background-color: #fff;
+    width: 95%; 
+    max-width: 1200px; 
+    padding: 20px; 
+    border: 5px solid #741919; 
+    border-radius: 10px; 
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); 
+    margin: 0 auto;
+  }
+  #navtoggle {
+    display: none;
+  }
+
+  #nav-menu.hidden{
+      display: block; 
+      margin: 24px auto;
+  }
+
+  nav {
+    padding: 16px;
+    height: 80px;
+    width: 95%;
+    border-radius: 10px;
+    background: #292929;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 15px 20px -5px;
+  }
+
+  nav ul {
+    width: 100%;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  nav ul li {
+    position: relative;
+    width: 140px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    user-select: none;
+    cursor: pointer;
+    margin: 0 20px;
+    border: 2px solid #fff;
+    overflow: hidden;
+  }
+  nav ul li a {
+    display: flex;   /* Use flex to center the text inside the a */
+    width: 100%;     /* Full width of the li */
+    height: 100%;    /* Full height of the li */
+    justify-content: center; /* Center text horizontally */
+    align-items: center;     /* Center text vertically */
+    font-size: 16px;
+    text-transform: uppercase;
+    color: #fff;
+    z-index: 10;
+    text-decoration: none;
+    transition: color 200ms ease;
+  }
+
+  nav ul li a:active {
+    background-color: white; /* Changes on click */
+  }
+  
+  nav ul li:hover a, #own_today {
+    color: black;
+  }
+  
+  nav ul li:before, #own_today:before {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 100%;
+    transform: skew(30deg);
+    background: #fff;
+    transition: width 400ms ease;
+  }
+  
+  nav ul li:hover:before, #own_today:before {
+    width: 120%;
+  }
+  
+  nav ul li:nth-child(2):before {
+    transform: skew(-20deg);
+  }
+  
+  nav ul li:nth-child(3):before {
+    transform: skew(0deg);
+  }
+  
+  nav ul li:nth-child(4):before, #own_today {
+    width: 180px;
+    height: 0%;
+    bottom: 0px;
+    transition: height 400ms ease;
+  }
+  
+  nav ul li:nth-child(4):hover:before, #own_today {
+    height: 100%;
+  }
+
+  .firstHalf_main h1 {
+    top: 4%;
+    font-size: 2rem;
+    left: 2%;
+  }
+
+  .firstHalf_main h2 {
+    position: absolute;
+    font-size: 2rem;
+  }
+
+  .hero_img {
+    text-align: center;
+  }
+
+  .hero_img img {
+    width: 65vw ;
+  }
+
+
+
+  .dmc_del {
+    text-align: left;
+    padding: 10px;
+    background-color:white; 
+    margin-right: 60%;
+    opacity: 0.8;
+    position: absolute;
+    top: 23%;
+    left: 7%;
+
+  }
+
+  .dmc_del p {
+    color: #741919;
+    font-size: x-large;
+  }
+
+  #dmc_header {
+    font-weight: bolder;
+    font-size: 1.5rem;
+  }
+
+  #own_today {
+    width: 10em;
+    font-weight: bolder;
+    padding: 1em 0em;
+    border-radius: 1.5em;
+    color: white;
+    cursor: pointer;
+    overflow: hidden;
+    z-index: 1;
+    transition: color 300ms ease, background-color 350ms ease;
+  }
+
+  #own_today:hover, #inv-display li a:hover {
+    color: black; /* Changes text color on hover */
+    background-color: #fff; /* Background color change on hover */
+    text-transform: uppercase;
+  }
+
+  #own_today:before, #inv-display li a::before {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 50%;
+    top: 0;
+    left: 0;
+    transform: skew(0deg); /* Skew effect similar to your nav items */
+    transition: width 400ms ease;
+    z-index: -1; /* Keep it behind the text */
+  }
+
+  #own_today:hover:before, #inv-display li a:hover::before {
+    width: 100%; /* Expands the pseudo-element on hover */
+  }
+
+  /* Grid and Associated content */
+
+  .secondHalf {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 3rem;
+    gap: 20px;
+    padding: 0 5%;
+  }
+
+  .upgrades {
+    grid-column: 1/2;
+    grid-row: 1/1;
+    border: none;
+  }
+
+  .reviews {
+    grid-column: 2/3;
+    border: none;
+  }
+
+  .secondHalf h2 {
+    text-align: left;
+  }
+
+  /* Styling for Classifications View */
+  #inv-display {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 0 auto;
+    padding: 0;
+  }
+  
+
+  #inv-display li {
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1); 
+    border-radius: 10px;
+    padding: 5%;
+
+  }
+
+  #inv-display li img {
+    box-shadow: 0px 4px 5px #741919
+  }
+
+  #inv-display li img:hover {
+    transform: scale(1.2); /* 1.2 means 120% of the original size */
+  }
+
+  #inv-display li a:hover {
+    text-decoration: none;
+    border-radius: 1.3em;
+    cursor: pointer;
+    background-color: #292929;
+    color: #fff;
+    text-transform: none;
+    padding: 5px;
+  }
+
+  /* Styling for Vehicle Details Div */
+  .vehicle_details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  }
+
+  #vehicle_details img {
+    grid-row: 1/4;
+    align-self: center;
+    justify-self: center;
+    width: auto;
+    height: 236px;
+  }
+  
+  #vehicle_description {
+    grid-column: 1/3;
+  }
+
+  #vehicle_para {
+    grid-column: 2/3;
+  }
+  
+
+  /* 
+    Styling for management view Large
+  */
+
+  .management_ul li {
+    
+    padding-left: 15%;
+    padding-right: 15%;
+  }
+
+  #classificationList {
+    width: 30%;
+    height: 35px;
+  }
+
+  /* Edit inventory Styling */
+#inventoryEditHeading {
+  padding-left: 10%;
+}
+
+.reviews-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.reviews-section h3 {
+  grid-column: 1/3;
+}
+
+.review-form {
+  transform: none;
+}
+}

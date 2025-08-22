@@ -1,0 +1,25 @@
+{
+  "name": "trueride",
+  "version": "1.0.0",
+  "description": "TrueRide is a full-stack car sales platform built with Node.js and Express.js, designed to let Store Owner list, and manage car listings securely, while clients can browse, make purchases, and leave reviews.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "author": "Uche Oranye",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^17.2.1",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "express-async-handler": "^1.2.0",
+    "express-ejs-layouts": "^2.5.1",
+    "mongodb": "^6.18.0",
+    "mongoose": "^8.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
