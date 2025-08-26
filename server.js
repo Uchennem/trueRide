@@ -10,16 +10,48 @@ const errorRoute = require("./routes/errorRoute")
 const connectDb = require('./mongoDb/dbConnection');
 const errorHandler = require('./middleware/errorHandler')
 const session = require("express-session")
+const flash = require("connect-flash")
+const messages = require("express-messages")
+const MongoStore = require('connect-mongo');
+const initCounters = require('./models/initCounters');
 
 //connect Db
-connectDb();
+connectDb().then(async () => {
+    await initCounters();
+})
 
-// Express Messages Middleware
-app.use(require('connect-flash')())
-app.use(function(req, res, next){
-  res.locals.messages = require('express-messages')(req, res)
+/* ***********************
+ * Middleware
+ * ************************/
+app.use(session({
+  store: MongoStore.create({
+    mongoUrl: process.env.CONNECTION_STRING, // your MongoDB connection string
+    collectionName: 'sessions'
+  }),
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  name: 'sessionId',
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 24, // 1 day
+    httpOnly: true,
+    secure: false // set to true in production with HTTPS
+  }
+}));
+
+
+// Flash middleware
+app.use(flash())
+
+// Messages middleware
+app.use(function (req, res, next) {
+  res.locals.messages = messages(req, res)
   next()
 })
+
+// Body Parsers
+app.use(express.urlencoded({ extended: true })) // for form submissions
+app.use(express.json());
 
 //View Engine and Templates
 app.set('view engine', 'ejs');

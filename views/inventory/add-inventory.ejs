@@ -1,0 +1,53 @@
+<h1 id="inventoryEditHeading">Add Inventory</h1>
+
+<div class="serverValidationError">
+    <%- messages() %>
+    <% if (errors) { %>
+        <ul class="notice">
+    <% errors.array().forEach(error => { %>
+        <li><%= error.msg %></li>
+    <%  }) %>
+    </ul>
+    <% } %>
+</div>
+
+<form id="updateForm" class="invUpdate" action="/inv/add-inventory" method="post" enctype="multipart/form-data"> 
+
+    <label for="classification_id">Classification: </label>
+    <select id="classification_id" name="classification_id" class="EditFormMembers" required>
+        <%- classificationSelect %>  <!-- This will generate the <option> tags -->
+    </select>
+
+  
+    <label for="inv_make">Make</label>
+    <input type="text" id="inv_make" name="inv_make" class="EditFormMembers" placeholder="Min of 3 characters" value="<%= locals.inv_make %>" required pattern="[A-Za-z]+">
+    
+    <label for="inv_model">Model</label>
+    <input type="text" id="inv_model" name="inv_model" class="EditFormMembers" placeholder="Min of 3 characters" value="<%= locals.inv_model %>" required pattern="[A-Za-z ]+">
+
+    <label for="inv_year">Year</label>
+    <input type="number" id="inv_year" name="inv_year" class="EditFormMembers" value="<%= locals.inv_year %>" required>
+
+    <label for="inv_description">Description</label>
+    <textarea id="inv_description" name="inv_description" class="EditFormMembers" required><%= locals.inv_description %></textarea>
+
+    <label for="inv_image">Upload Image</label>
+    <input type="file" id="inv_image" name="inv_image" class="EditFormMembers" required <%= locals.inv_image %>>
+
+    <label for="inv_thumbnail">Thumbnail Name (optional)</label>
+    <input type="file" id="inv_thumbnail" name="inv_thumbnail" class="EditFormMembers" placeholder="Optional thumbnail file name" <%= locals.inv_thumbnail %>>
+
+    <label for="inv_price">Price</label>
+    <input type="number" id="inv_price" name="inv_price" class="EditFormMembers" value="<%= locals.inv_price %>" required>
+
+    <label for="inv_miles">Miles</label>
+    <input type="number" id="inv_miles" name="inv_miles" class="EditFormMembers" value="<%= locals.inv_miles %>" required>
+
+    <label for="inv_color">Color</label>
+    <input type="text" id="inv_color" name="inv_color" class="EditFormMembers" value="<%= locals.inv_color %>" required>
+
+    <button type="submit" id="editSubmitBtn">Add Vehicle</button>
+
+</form>
+
+<script src="/js/inv-update.js"></script>

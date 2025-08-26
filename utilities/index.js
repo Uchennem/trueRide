@@ -73,12 +73,6 @@ Util.buildClassificationGrid = async function(data) {
   return grid;
 };
 
-Util.buildVehicleById = async function(vehicle) {
-    let section =''
-    
-    return section;
-}
-
 Util.buildVehicleDetails = async function(vehicle) {
     let content ="";
     if(vehicle) {
@@ -116,7 +110,7 @@ Util.buildVehicleDetails = async function(vehicle) {
  *  Build Classifications Management view
  * ************************** */
  Util.buildClassificationList = (data, selectedId = null) => {
-  let options = '<option value="" disabled>Select a classification</option>'; // Add placeholder
+  let options = '<option value="" disabled selected>Make choice</option>'; // Add placeholder
 
   // Use forEach to iterate over each item in the data array
   data.forEach((element) => {
@@ -128,6 +122,7 @@ Util.buildVehicleDetails = async function(vehicle) {
   // Return the final string with all <option> elements
   return options;
 };
+
 
 /*****************************************
 * Middleware For Handling Errors

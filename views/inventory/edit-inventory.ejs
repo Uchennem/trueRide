@@ -1,0 +1,82 @@
+<h1 id="inventoryEditHeading">Edit <%= itemName %></h1>
+
+<div class="serverValidationError">
+  <%- messages() %>
+  <% if (errors) { %>
+    <ul class="notice">
+      <% errors.array().forEach(error => { %>
+        <li><%= error.msg %></li>
+      <% }) %>
+    </ul>
+  <% } %>
+</div>
+
+<form id="updateForm" class="invUpdate" action="/inv/update" method="post"> 
+  <div class="form-group">
+    <label for="classification_id">Classification:</label>
+    <select id="classification_id" name="classification_id" class="EditFormMembers" required>
+      <%- classificationSelect %>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="inv_make">Make</label>
+    <input type="text" id="inv_make" name="inv_make" class="EditFormMembers" 
+      placeholder="Min of 3 characters" value="<%= locals.inv_make %>" 
+      required pattern="[A-Za-z ]{3,}">
+  </div>
+
+  <div class="form-group">
+    <label for="inv_model">Model</label>
+    <input type="text" id="inv_model" name="inv_model" class="EditFormMembers" 
+      placeholder="Min of 3 characters" value="<%= locals.inv_model %>" 
+      required pattern="[A-Za-z ]{3,}">
+  </div>
+
+  <div class="form-group">
+    <label for="inv_year">Year</label>
+    <input type="number" id="inv_year" name="inv_year" class="EditFormMembers" 
+      value="<%= locals.inv_year %>" required>
+  </div>
+
+  <div class="form-group">
+    <label for="inv_description">Description</label>
+    <textarea id="inv_description" name="inv_description" class="EditFormMembers" required><%= locals.inv_description %></textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="inv_image">Image URL</label>
+    <input type="text" id="inv_image" name="inv_image" class="EditFormMembers" 
+      value="<%= locals.inv_image %>">
+  </div>
+
+  <div class="form-group">
+    <label for="inv_thumbnail">Thumbnail URL</label>
+    <input type="text" id="inv_thumbnail" name="inv_thumbnail" class="EditFormMembers" 
+      value="<%= locals.inv_thumbnail %>">
+  </div>
+
+  <div class="form-group">
+    <label for="inv_price">Price</label>
+    <input type="number" id="inv_price" name="inv_price" class="EditFormMembers" 
+      value="<%= locals.inv_price %>" required>
+  </div>
+
+  <div class="form-group">
+    <label for="inv_miles">Miles</label>
+    <input type="number" id="inv_miles" name="inv_miles" class="EditFormMembers" 
+      value="<%= locals.inv_miles %>" required>
+  </div>
+
+  <div class="form-group">
+    <label for="inv_color">Color</label>
+    <input type="text" id="inv_color" name="inv_color" class="EditFormMembers" 
+      value="<%= locals.inv_color %>" required>
+  </div>
+
+  <input type="hidden" name="inv_id" <% if(locals.inv_id) { %> value="<%= locals.inv_id %>" <% } %>>
+
+  <button type="submit" id="editSubmitBtn" disabled>Update Vehicle</button>
+</form>
+
+<script src="/js/inv-update.js"></script>

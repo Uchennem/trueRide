@@ -1,0 +1,24 @@
+<h1 id="inventoryEditHeading">Add Classification</h1>
+
+<div class="serverValidationError">
+    <%- messages() %>
+    <% if (errors) { %>
+        <ul class="notice">
+    <% errors.array().forEach(error => { %>
+        <li><%= error.msg %></li>
+    <%  }) %>
+    </ul>
+    <% } %>
+</div>
+
+<form id="addClassification" class="invUpdate" action="/inv/add-classification" method="post"> 
+  
+    <label for="classification_name">Classification Name</label>
+    <input type="text" id="classification_name" name="classification_name" class="EditFormMembers" placeholder="Min of 3 characters"
+     value="<%= locals.classification_name %>" required title="No spaces or special Characters allowed" pattern="[A-Za-z]+">
+
+    <button type="submit" id="editSubmitBtn">Add Classification</button>
+
+</form>
+
+<script src="/js/inv-update.js"></script>

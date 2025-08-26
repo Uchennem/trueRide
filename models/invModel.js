@@ -1,5 +1,6 @@
 const Classification = require('./classificationModelMongoose');
 const Inventory = require('./inventoryModelMongoose');
+const connectDB = require("../mongoDb/dbConnection")
 
 //Note: Try/catch is unneccessary because I alread have express error handler on the routes. This is just for me
 
@@ -48,5 +49,68 @@ async function getInvByInventoryId(inventory_id) {
   }
 }
 
+/*********************************
+ *  Update Vehicle Data
+ * Unit 5, Update  Activity
+ * **************************************/
 
-module.exports = {getAllClassifications, getInvByClassificationId, getClassificationName, getInvByInventoryId}
+async function updateInventory(
+  inv_id, inv_make, inv_model, 
+  inv_description, inv_image, inv_thumbnail, inv_price, 
+  inv_year, inv_miles, inv_color, classification_id
+) {
+  // Use the Inventory model directly
+  const result = await Inventory.findOneAndUpdate(
+    { inv_id: inv_id },           // filter
+    {                             // update
+      inv_make,
+      inv_model,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_year,
+      inv_miles,
+      inv_color,
+      classification_id
+    },
+    { new: true }                 // return the updated document
+  );
+
+  return result;
+}
+
+async function deleteInventoryById(inventory_id) {
+   try {
+    const result = await Inventory.deleteOne({ inv_id: inventory_id });
+    return result; // contains info about deleted count
+    } catch (error) {
+        console.error("Error deleting inventory:", error);
+        throw error;
+    }
+}
+
+async function addClassification(classification) {
+  try {
+    const newClassification = new Classification({classification_name: classification})
+    const savedItem = await newClassification.save()
+    return savedItem
+  } catch(error) {
+    console.error("Error adding Classification: ", error);
+    throw error;
+  }
+}
+
+async function addInventoryItem(inventoryItem) {
+  try {
+    const newInventory = new Inventory(inventoryItem)
+    const savedItem = await newInventory.save()
+    return savedItem
+  } catch(error) {
+    console.error("Error adding Inventory: ", error);
+    throw error;
+  }
+}
+
+
+module.exports = {getAllClassifications, getInvByClassificationId, getClassificationName, getInvByInventoryId, updateInventory, deleteInventoryById, addClassification, addInventoryItem}

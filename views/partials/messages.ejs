@@ -1,0 +1,9 @@
+<% if (messages()) { %>
+  <div class="flash-messages">
+    <%- messages({
+      wrapper: "div",
+      message: "div",
+      separator: "</div><div>"
+    }) %>
+  </div>
+<% } %>

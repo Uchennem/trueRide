@@ -381,10 +381,36 @@ justify-content: space-around;
   background-color: #f44336; /* Red for Delete */
 }
 
-.notice li {
+/* .notice li {
   color: #f44336;
   font-weight: bold;
+} */
+
+/* Flash messahges styling */
+.info {
+  background: #dbeafe;
+  color: #1e3a8a;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 6px;
 }
+
+.success {
+  background: #dcfce7;
+  color: #166534;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 6px;
+}
+
+.error {
+  background: #fee2e2;
+  color: #991b1b;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 6px;
+}
+
 
 /* Responsive table */
 @media (max-width: 768px) {
@@ -394,10 +420,84 @@ justify-content: space-around;
 }
 
 /* Delete confirm CSS */
-.deletePara {
-  color: #741919;
+.invDelete {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+}
+
+.invDelete label {
+  display: block;
+  margin-top: 15px;
   font-weight: bold;
 }
+
+.EditFormMembers {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  box-sizing: border-box;
+  background-color: #fff;
+}
+
+.EditFormMembers[readonly] {
+  background-color: #e9e9e9;
+  cursor: not-allowed;
+}
+
+/* Delete warning text */
+.deletePara {
+  margin: 20px 0;
+  font-weight: bold;
+  color: #b00020; /* dark red */
+}
+
+/* Button styling */
+#editSubmitBtn {
+  display: inline-block;
+  padding: 10px 20px;
+  margin-top: 10px;
+  background-color: #000; /* black */
+  color: #fff; /* white text */
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#editSubmitBtn:hover {
+  background-color: #c00; /* red on hover */
+  color: #fff;
+}
+
+#editSubmitBtn:active {
+  background-color: #900; /* darker red on click */
+  color: #fff;
+}
+
+/* Error messages styling */
+.serverValidationError {
+  margin-bottom: 15px;
+  color: #b00020; /* dark red */
+  font-weight: bold;
+}
+
+.serverValidationError ul {
+  margin: 5px 0 0 20px;
+  padding: 0;
+}
+
+.serverValidationError li {
+  list-style-type: disc;
+}
+
 
 
 
@@ -691,13 +791,87 @@ justify-content: space-around;
 
   #classificationList {
     width: 30%;
-    height: 35px;
+    height: 39px;
   }
 
-  /* Edit inventory Styling */
 #inventoryEditHeading {
-  padding-left: 10%;
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #2c3e50;
 }
+
+.invUpdate {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #34495e;
+}
+
+.EditFormMembers,
+textarea,
+select {
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border 0.2s ease-in-out;
+}
+
+.EditFormMembers:focus,
+textarea:focus,
+select:focus {
+  border-color: #3498db;
+  outline: none;
+  box-shadow: 0 0 4px rgba(52, 152, 219, 0.3);
+}
+
+button#editSubmitBtn {
+  display: block;
+  width: 100%;
+  padding: 0.75rem;
+  background: #3498db;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: not-allowed;
+  opacity: 0.7;
+  transition: opacity 0.3s, background 0.3s;
+}
+
+button#editSubmitBtn:enabled {
+  cursor: pointer;
+  opacity: 1;
+  background: #2980b9;
+}
+
+.serverValidationError {
+  margin-bottom: 1rem;
+  color: #e74c3c;
+  font-size: 0.95rem;
+}
+
+/* .notice {
+  list-style: inside square;
+  padding-left: 1rem;
+  color: #c0392b;
+} */
 
 .reviews-section {
   display: grid;

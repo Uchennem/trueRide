@@ -9,6 +9,11 @@ classificationList.addEventListener("change", function () {
 
   // Log the classification ID for debugging
   console.log(`classification_id is: ${classification_id}`);
+  // If user selects the placeholder (no valid value), clear the table
+  if (isNaN(classification_id)) {
+    document.getElementById("inventoryDisplay").innerHTML = "";
+    return; 
+  }
 
   // Define the API endpoint to fetch inventory data
   let classIdURL = `/inv/getInventory/${classification_id}`;
@@ -67,3 +72,12 @@ function buildInventoryList(data) {
   // Inject the generated HTML into the inventory display container
   inventoryDisplay.innerHTML = dataTable;
 }
+
+setTimeout(() => {
+    const flash = document.querySelector('#messages')
+    if (flash) {
+      flash.style.transition = 'opacity 0.5s'
+      flash.style.opacity = 0
+      setTimeout(() => flash.remove(), 500)
+    }
+  }, 5000) // 3 seconds
