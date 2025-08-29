@@ -142,9 +142,7 @@ async function accountLogin(req, res, next) {
     // Role-based redirect
     if (user.account_type === "Admin" || user.account_type ==="Employee") {
       console.log("Super User Logged in!");
-      return res.render("account/management", 
-        {title: "Home", nav, errors: null}
-      );
+      return res.redirect("/account/management");
     }
 
     console.log("Regular user logged in");
@@ -161,5 +159,14 @@ async function accountLogin(req, res, next) {
   }
 }
 
+async function buildManagementView(req, res, next) {
+   let nav = await utilities.getNav()
+    res.render("account/management", {
+      title: "Adminsitrative Management Portal",
+      nav,
+      errors: null,
+    }) 
+}
 
-module.exports = {buildLogin, buildRegister, registerAccount, accountLogin}
+
+module.exports = {buildLogin, buildRegister, registerAccount, accountLogin, buildManagementView}

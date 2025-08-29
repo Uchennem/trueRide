@@ -11,6 +11,8 @@ router.post("/login",  asyncHandler(accountController.accountLogin))
 router.get("/registration", asyncHandler(accountController.buildRegister))
 router.post("/register", asyncHandler(accountController.registerAccount))
 
+//adminstrative business
+router.get("/management", asyncHandler(accountController.buildManagementView))
 
 
 module.exports = router;
