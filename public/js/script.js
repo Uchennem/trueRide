@@ -10,4 +10,17 @@ toggle.addEventListener('click', () => {
     toggle.innerHTML = '☰';
   }
 });
+// Wait 5 seconds, then fade out all messages
+setTimeout(() => {
+  const flashes = document.querySelectorAll(
+    '.flash-messages > div, .serverValidationError li'
+  );
+  flashes.forEach(flash => {
+    flash.style.transition = 'opacity 0.5s';
+    flash.style.opacity = 0;
+    setTimeout(() => flash.remove(), 500); // remove from DOM
+  });
+}, 5000);
+
+
 

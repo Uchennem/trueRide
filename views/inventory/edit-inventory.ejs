@@ -2,13 +2,6 @@
 
 <div class="serverValidationError">
   <%- messages() %>
-  <% if (errors) { %>
-    <ul class="notice">
-      <% errors.array().forEach(error => { %>
-        <li><%= error.msg %></li>
-      <% }) %>
-    </ul>
-  <% } %>
 </div>
 
 <form id="updateForm" class="invUpdate" action="/inv/update" method="post"> 

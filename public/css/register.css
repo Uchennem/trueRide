@@ -1,0 +1,106 @@
+/* ================================
+   Register Page Styling
+   ================================ */
+#registerHeading {
+  text-align: center;
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+/* Validation messages */
+.serverValidationError {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.serverValidationError .notice {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  color: #d9534f;
+  font-weight: 500;
+}
+
+.serverValidationError .notice li {
+  margin: 5px 0;
+}
+
+/* Register form wrapper */
+#registerForm {
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Labels */
+#registerForm label {
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 0.25rem;
+}
+
+/* Inputs */
+.registerFormMembers {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  transition: border 0.2s;
+  font-size: 1rem;
+}
+
+.registerFormMembers:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0,123,255,0.2);
+}
+
+/* Special text for password rules */
+.passwPattern {
+  font-size: 0.85rem;
+  color: #666;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+/* Show password button */
+.toggle-password {
+  background: none;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+  font-size: 0.9rem;
+  align-self: flex-end;
+  margin-top: -0.5rem;
+  margin-bottom: 0.5rem;
+  transition: color 0.2s;
+}
+
+.toggle-password:hover {
+  color: #0056b3;
+}
+
+/* Submit button */
+#registerForm button[type="submit"] {
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 0.85rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+#registerForm button[type="submit"]:hover {
+  background: #218838;
+}

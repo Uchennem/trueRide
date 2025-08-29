@@ -1,0 +1,41 @@
+<link rel="stylesheet" href="/css/register.css">
+
+<h1 id="registerHeading">Register Account</h1>
+
+<div class="serverValidationError">
+  <%- messages() %>
+</div>
+
+<form id="registerForm" action="/account/register" method="post"> 
+
+  <label for="account_firstname">First Name</label>
+  <input type="text" id="account_firstname" name="account_firstname" class="registerFormMembers registerText" 
+         value="<%= formData ? formData.account_firstname : '' %>" 
+         placeholder="First Name" required pattern="[A-Za-z]+">
+
+  <label for="account_lastname">Last Name</label>
+  <input type="text" id="account_lastname" name="account_lastname" class="registerFormMembers registerText" 
+         value="<%= formData ? formData.account_lastname : '' %>" 
+         placeholder="Last Name" required pattern="[A-Za-z]+">
+
+  <label for="account_email">Email Address</label>
+  <input type="email" id="account_email" name="account_email" class="registerFormMembers" 
+         value="<%= formData ? formData.account_email : '' %>" 
+         placeholder="Email Address" required 
+         pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}">
+
+  <label for="account_password">Password</label>
+  <span class="passwPattern">
+    Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1 special character
+  </span>
+  <div class="password-wrapper">
+    <input type="password" id="account_password" class="registerFormMembers registerPass" 
+           name="account_password" placeholder="Password Here" required 
+           pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
+    <button type="button" class="toggle-password" onclick="togglePassword()">Show</button>
+  </div>
+
+  <button type="submit">Register</button>
+</form>
+
+<script src="/js/registerForm.js"></script>

@@ -7,6 +7,7 @@ const app = express();
 const indexRoute = require("./routes/indexRoute");
 const inventoryRoute = require("./routes/inventoryRoutes")
 const errorRoute = require("./routes/errorRoute")
+const accountRoute = require("./routes/accountRoute")
 const connectDb = require('./mongoDb/dbConnection');
 const errorHandler = require('./middleware/errorHandler')
 const session = require("express-session")
@@ -65,6 +66,8 @@ app.use('/', indexRoute)
 app.use("/inv", inventoryRoute)
 
 app.use("/error", errorRoute)
+
+app.use("/account", accountRoute)
 
 app.use(errorHandler)
 app.listen(port, () => {

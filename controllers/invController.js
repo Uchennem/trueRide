@@ -21,6 +21,7 @@ invCont.buildByClassificationId = async function (req, res, next) {
     res.render("./vehicleDetails/classification", {
       title: className + " vehicles",
       nav,
+      errors: null,
       grid,
     })
 }
@@ -44,6 +45,7 @@ invCont.buildByInventoryId = async function (req, res, next) {
     res.render("./vehicleDetails/inventory", {
       title: inventoryName,
       nav,
+      errors: null,
       section,
     })
 }
@@ -237,7 +239,24 @@ invCont.deleteInventory = async (req, res, next) => {
     res.redirect("/inv/")
   } else {
     req.flash("error", "Inventory item not found, delete failed.");
-    res.status(404).render("/inventory/delete-confirm");
+    res.status(404).render("./inventory/delete-confirm", {
+    title: "Delete " + itemName,
+    nav,
+    classificationSelect: classificationSelect,  // Render the dropdown
+    errors: null,
+    itemName: itemName,
+    inv_id: item.inv_id,
+    inv_make: item.inv_make,
+    inv_model: item.inv_model,
+    inv_year: item.inv_year,
+    inv_description: item.inv_description,
+    inv_image: item.inv_image,
+    inv_thumbnail: item.inv_thumbnail,
+    inv_price: item.inv_price,
+    inv_miles: item.inv_miles,
+    inv_color: item.inv_color,
+    classification_id: item.classification_id  // This will be pre-selected in the dropdown
+    });
   }
 }
 
@@ -258,26 +277,31 @@ invCont.addClassificationView = async function (req, res) {
  *  Add Classification Data
  * ************************** */
 invCont.addClassification = async function (req, res, next) {
-  let nav = await utilities.getNav()
-  const {
-    classification_name
-  } = req.body
+  let nav = await utilities.getNav();
+  const { classification_name } = req.body;
 
-  console.log(classification_name)
-  const updateResult = await invModel.addClassification(classification_name)
-  if (updateResult) {
-    req.flash("success", `The ${classification_name} classification was successfully created.`)
-    res.redirect("/inv/")
-  } else {
-    req.flash("error", "Sorry, the insert failed.")
-    res.status(501).render("inventory/add-classification", {
+  try {
+    const updateResult = await invModel.addClassification(classification_name);
+    req.flash("success", `The ${classification_name} classification was successfully created.`);
+    res.redirect("/inv/");
+  } catch (error) {
+    console.error("Error adding Classification:", error);
+
+    // Check if it's a validation error
+    if (error.name === "ValidationError") {
+      const messages = Object.values(error.errors).map(val => val.message);
+      req.flash("error", messages.join("<br>"));
+    } else {
+      req.flash("error", "Sorry, the insert failed.");
+    }
+
+    res.status(400).render("inventory/add-classification", {
       title: "Add New Classification",
       nav,
-      errors: null,
-    })
+      errors: error.errors || null,
+    });
   }
-
-}
+};
 
 /*********************************
  *  Add Inventory View and Data
@@ -299,45 +323,67 @@ invCont.addInventoryView = async function (req, res, next) {
 }
 
 invCont.addInventory = async function (req, res, next) {
-  let nav = await utilities.getNav()
+  let nav = await utilities.getNav();
   const {
-    inv_make,
-    inv_model,
-    inv_description,
-    inv_price,
-    inv_year,
-    inv_miles,
-    inv_color,
-    classification_id
-  } = req.body
-
-  // Extract file paths from Multer
-  const inv_image = req.files['inv_image'] ? `/images/vehicles/${req.files['inv_image'][0].filename}` : '';
-  const inv_thumbnail = req.files['inv_thumbnail'] ? `/images/vehicles/${req.files['inv_thumbnail'][0].filename}` : '';
+    inv_make, inv_model, inv_description, inv_price,
+    inv_year, inv_miles, inv_color, classification_id
+  } = req.body;
+  if (inv_price < 0) {
+  req.flash("error", "Price cannot be negative.");
+  return res.status(400).redirect("/inv/add-inventory");
+  }
+  if (inv_year < 1886 || inv_year > new Date().getFullYear() + 1) {
+    req.flash("error", "Year is not valid.");
+    return res.status(400).redirect("/inv/add-inventory");
+  }
+  const inv_image = req.files?.['inv_image']
+    ? `/images/vehicles/${req.files['inv_image'][0].filename}`
+    : '';
+  const inv_thumbnail = req.files?.['inv_thumbnail']
+    ? `/images/vehicles/${req.files['inv_thumbnail'][0].filename}`
+    : '';
 
   try {
     const inventoryItem = {
-    inv_make,
-    inv_model,
-    inv_description,
-    inv_image,
-    inv_thumbnail,
-    inv_price,
-    inv_year,
-    inv_miles,
-    inv_color,
-    classification_id
+      inv_make,
+      inv_model,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_year,
+      inv_miles,
+      inv_color,
+      classification_id
     };
-    const updateResult = await invModel.addInventoryItem (inventoryItem)
-    const itemName = inv_make + " " + inv_model
-    req.flash("success", `The ${itemName} was successfully added.`)
-    res.redirect("/inv/")
-  } catch(error) {
-    console.error("Error adding Inventory:", error)
-    req.flash("error", "Sorry, the item addition has failed.")
-    res.status(501).redirect("inv/add-inventory")
+
+    const updateResult = await invModel.addInventoryItem(inventoryItem);
+    const itemName = inv_make + " " + inv_model;
+    req.flash("success", `The ${itemName} was successfully added.`);
+    res.redirect("/inv/");
+  } catch (error) {
+    console.error("Error adding Inventory:", error);
+
+    if (error.name === "ValidationError") {
+      const messages = Object.values(error.errors).map(val => val.message);
+      req.flash("error", messages.join("<br>"));
+    } else {
+      req.flash("error", "Sorry, the item addition has failed.");
+    }
+
+    // rebuild select dropdown on error
+    const classificationData = await invModel.getAllClassifications();
+    const classificationSelect = utilities.buildClassificationList(classificationData);
+
+    res.status(400).render("inventory/add-inventory", {
+      title: "Add New Inventory",
+      nav,
+      classificationSelect,
+      errors: error.errors || null,
+    });
   }
-}
+};
+
 
 
 module.exports = invCont;

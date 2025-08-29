@@ -72,12 +72,3 @@ function buildInventoryList(data) {
   // Inject the generated HTML into the inventory display container
   inventoryDisplay.innerHTML = dataTable;
 }
-
-setTimeout(() => {
-    const flash = document.querySelector('#messages')
-    if (flash) {
-      flash.style.transition = 'opacity 0.5s'
-      flash.style.opacity = 0
-      setTimeout(() => flash.remove(), 500)
-    }
-  }, 5000) // 3 seconds

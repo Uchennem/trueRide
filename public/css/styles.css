@@ -417,6 +417,10 @@ justify-content: space-around;
   #inventoryDisplay th, #inventoryDisplay td {
     padding: 8px;
   }
+
+  .vehicle_details img {
+    width: 90%;
+  }
 }
 
 /* Delete confirm CSS */
@@ -495,7 +499,7 @@ justify-content: space-around;
 }
 
 .serverValidationError li {
-  list-style-type: disc;
+  list-style: none;
 }
 
 
