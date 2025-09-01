@@ -5,7 +5,11 @@ document.addEventListener("DOMContentLoaded", function() {
   if (passwordInput && loginForm) {
     // Panda goes up/down with focus
     passwordInput.addEventListener("focusin", () => loginForm.classList.add("up"));
-    passwordInput.addEventListener("focusout", () => loginForm.classList.remove("up"));
+    passwordInput.addEventListener("focusout", (e) => {
+      // if the next focused element is the toggle button, keep the class
+      if (e.relatedTarget && e.relatedTarget.classList.contains("toggle-password")) return;
+      loginForm.classList.remove("up");
+    });
 
     // Trigger shake if login failed
     const loginFailed = loginForm.getAttribute("data-login-failed") === "true";
@@ -29,4 +33,12 @@ document.addEventListener("DOMContentLoaded", function() {
       eyeBall.style.height = y + "px";
     });
   });
+
+
 });
+
+function togglePassword() {
+  const passwordInput = document.getElementById("account_password");
+  const type = passwordInput.type === "password" ? "text" : "password";
+  passwordInput.type = type;
+}

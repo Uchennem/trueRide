@@ -1,6 +1,5 @@
 <link rel="stylesheet" href="/css/form.css">
 
-
 <div id="form_body">
     <div class="panda">
         <div class="ear"></div>
@@ -29,24 +28,42 @@
         <div class="hand"></div>
         <div class="hand rgt"></div>
         <h1>True Ride Login</h1>
+
         <div class="serverValidationError">
             <%- messages() %>
         </div>
+
         <div class="form-group">
-            <label for="account_email" class="form-label">email</label>
+            <label for="account_email" class="form-label">Email</label>
             <input type="text" id="account_email" name="account_email" required="required" class="form-control" 
-                   value="<%= formData ? formData.account_email : '' %>" pattern=[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}">
+                   value="<%= formData ? formData.account_email : '' %>" 
+                   pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}">
         </div>
+
         <div class="form-group">
             <label for="account_password" class="form-label">Password</label>
-            <input id="account_password" name="account_password" type="password" required="required" class="form-control" 
-                   pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
+            <span class="passwPattern">
+              Passwords must be at least 12 characters and contain at least 1 number, 
+              1 capital letter, 1 small letter, and 1 special character
+            </span>
+            <div class="password-wrapper">
+                <input id="account_password" name="account_password" type="password" required="required" 
+                       class="form-control" 
+                       placeholder="Enter your password"
+                       pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
+                <button type="button" class="toggle-password" onclick="togglePassword()">Show</button>
+            </div>
             <p class="alert">Invalid Credentials. .!!</p>
         </div>
+
         <button id="userloginbtn" class="login">LOGIN</button>
     </form>
     
     <p id="loginPara">No account? <span><a href="/account/registration" title="Create New Account">Sign up</a></span></p>
 </div>
+
+<script>
+  
+</script>
 
 <script src="/js/loginForm.js"></script>

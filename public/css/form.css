@@ -427,6 +427,7 @@ button[type="submit"] {
 }
 
 .passwPattern {
+    padding-top: 10px;
     font-size: x-small;
     font-weight: bolder;
     color: #741919;
