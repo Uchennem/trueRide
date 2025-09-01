@@ -60,6 +60,10 @@ app.use(expressLayouts);
 app.set('layout', './layouts/layout') 
 app.use(static)
 
+app.use((req, res, next) => {
+  res.locals.user = req.session.user || null
+  next()
+})
 // Site Routes
 app.use('/', indexRoute)
 

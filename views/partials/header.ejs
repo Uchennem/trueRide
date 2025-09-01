@@ -3,6 +3,11 @@
         <a href="/" title="Return to home page">True Ride Motors</a>
     </span>
     <div id="tools">
-        <a href="/account/login" title="Click to log in">My Account</a>
-    </div>
+    <% if (user) { %>
+      <span>Welcome, <%= user.first_name%>!</span>
+      <a href="/account/logout" title="Click to log out">Logout</a>
+    <% } else { %>
+      <a href="/account/login" title="Click to log in">My Account</a>
+    <% } %>
+  </div>
 </header>

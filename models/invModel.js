@@ -1,5 +1,6 @@
 const Classification = require('./classificationModelMongoose');
 const Inventory = require('./inventoryModelMongoose');
+const Invcomments = require('./commentSchema')
 const connectDB = require("../mongoDb/dbConnection")
 
 //Note: Try/catch is unneccessary because I alread have express error handler on the routes. This is just for me
@@ -112,5 +113,37 @@ async function addInventoryItem(inventoryItem) {
   }
 }
 
+async function getCommentsByInvId(inv_id) {
+  try {
+    const comments = await Invcomments.find({ inv_id }).sort({ created_at: -1 }).lean();
 
-module.exports = {getAllClassifications, getInvByClassificationId, getClassificationName, getInvByInventoryId, updateInventory, deleteInventoryById, addClassification, addInventoryItem}
+    // If no comments, return an empty array
+    if (!comments || comments.length === 0) {
+      return [];
+    }
+
+    return comments;
+  } catch (error) {
+    console.error("Error looking up comments:", error);
+    throw error;
+  }
+}
+
+async function createComment(data) {
+  try {
+    const newComment = new Invcomments({
+      user_email: data.user_email,
+      inv_id: data.inv_id,
+      comment_text: data.comment_text
+    })
+    return await newComment.save()
+  } catch (err) {
+    console.error("Error creating comment:", err)
+    throw err
+  }
+}
+
+
+module.exports = {getAllClassifications, getInvByClassificationId, getClassificationName, 
+                  getInvByInventoryId, updateInventory, deleteInventoryById, addClassification, 
+                  addInventoryItem, getCommentsByInvId, createComment}

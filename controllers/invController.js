@@ -30,25 +30,43 @@ invCont.buildByClassificationId = async function (req, res, next) {
  *  Build inventory by Inventory Id view
  * ************************** */
 invCont.buildByInventoryId = async function (req, res, next) {
-    const inventory_id = req.params.inventoryId
-    console.log(req.params.inventoryId)
-    
-    const data = await invModel.getInvByInventoryId(inventory_id)
+  try {
+    const inventory_id = req.params.inventoryId;
+    console.log("InventoryId:", inventory_id);
+
+    // Get vehicle data
+    const data = await invModel.getInvByInventoryId(inventory_id);
     if (!data) {
-      res.status(404)
-      throw new Error("Cannot get Inventory Item")
+      res.status(404);
+      throw new Error("Cannot get Inventory Item");
     }
-    console.log("Here is the data: ", data)
-    const section = await utilities.buildVehicleDetails(data)
-    let nav = await utilities.getNav()
-    const inventoryName = `${data.inv_make} ${data.inv_model}`
+
+    // Get comments for this vehicle
+    const comments = await invModel.getCommentsByInvId(inventory_id);
+
+    // Build section (vehicle details HTML snippet)
+    const section = await utilities.buildVehicleDetails(data);
+
+    // Navigation
+    let nav = await utilities.getNav();
+
+    // Title
+    const inventoryName = `${data.inv_make} ${data.inv_model}`;
+
+    // Render page with comments
     res.render("./vehicleDetails/inventory", {
       title: inventoryName,
       nav,
       errors: null,
       section,
-    })
-}
+      item: data,
+      comments, // 👈 now available in EJS
+    });
+  } catch (err) {
+    console.error("Error in buildByInventoryId:", err);
+    next(err);
+  }
+};
 
 /* ***************************
  *  Build Inventory Management view

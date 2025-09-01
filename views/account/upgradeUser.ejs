@@ -1,0 +1,40 @@
+<link rel="stylesheet" href="/css/upgrade.css">
+
+
+<div class="upgrade-container">
+  <h1>Upgrade User</h1>
+
+    <div class="serverValidationError">
+        <%- messages() %>
+    </div>
+
+  <form action="/account/upgrade" method="POST" class="upgrade-form">
+    <!-- Search User by Email -->
+    <div class="form-group">
+      <label for="account_email">User Email</label>
+      <input 
+        type="email" 
+        id="account_email" 
+        name="account_email" 
+        placeholder="Enter user's email"
+        required
+      >
+    </div>
+
+    <!-- Role Selection -->
+    <div class="form-group">
+      <label>Change Role To:</label>
+      <div class="radio-group">
+        <input type="radio" id="roleAdmin" name="role" value="Admin" required>
+        <label for="roleAdmin">Admin</label>
+      </div>
+      <div class="radio-group">
+        <input type="radio" id="roleEmployee" name="role" value="Employee">
+        <label for="roleEmployee">Employee</label>
+      </div>
+    </div>
+
+    <button type="submit" class="btn">Update Role</button>
+  </form>
+</div>
+

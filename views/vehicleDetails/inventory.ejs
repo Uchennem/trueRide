@@ -1,9 +1,41 @@
+<link rel="stylesheet" href="/css/comments.css">
 <% if (title) { %>
     <h1 id="classification_header"><%= title %></h1>
     <% } else {
       res.redirect('/')
 } %>
 
-<%# messages() %>
+<% messages() %>
 
 <%- section %>
+
+<h2>Comments</h2>
+
+<% if (user) { %>
+  <!-- Comment Form -->
+  <form method="POST" action="/inv/<%= item.inv_id %>/comment" class="comment-form">
+    <textarea 
+      name="comment_text" 
+      placeholder="Write your comment..." 
+      required 
+      class="comment-textarea"></textarea>
+    <button type="submit" class="comment-submit">Post Comment</button>
+  </form>
+<% } else { %>
+  <p><a href="/account/login">Log in</a> to leave a comment.</p>
+<% } %>
+
+<!-- Comments Section -->
+<div class="comments-box">
+  <% if (comments && comments.length > 0) { %>
+    <% comments.forEach(c => { %>
+      <div class="comment">
+        <strong><%= c.user_email %></strong>
+        <p><%= c.comment_text %></p>
+        <small><%=c.created_at.toLocaleString() %></small>
+      </div>
+    <% }) %>
+  <% } else { %>
+    <p>No comments yet. Be the first to comment!</p>
+  <% } %>
+</div>

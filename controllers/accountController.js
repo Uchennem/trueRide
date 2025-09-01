@@ -1,5 +1,6 @@
 const utilities = require("../utilities/index")
-const accountModel = require("../models/accountModelMongoose")
+const accountModelSchema = require("../models/accountModelMongoose")
+const accountModel = require("../models/accountModel")
 const bcrypt = require("bcrypt")
 
 
@@ -56,7 +57,7 @@ async function registerAccount(req, res, next) {
     }
 
     // ==== Check for existing email ====
-    const userAvailable = await accountModel.findOne({ account_email });
+    const userAvailable = await accountModelSchema.findOne({ account_email });
     if (userAvailable) {
       return res.status(400).render("account/register", {
         title: "Register Account",
@@ -70,7 +71,7 @@ async function registerAccount(req, res, next) {
     const hashedPassword = await bcrypt.hash(account_password, 10);
 
     // ==== Create user ====
-    const user = await accountModel.create({
+    const user = await accountModelSchema.create({
       account_firstname,
       account_lastname,
       account_email,
@@ -108,7 +109,7 @@ async function accountLogin(req, res, next) {
       });
     }
 
-    const user = await accountModel.findOne({ account_email });
+    const user = await accountModelSchema.findOne({ account_email });
 
     if (!user) {
       return res.status(401).render("account/login", {
@@ -135,9 +136,18 @@ async function accountLogin(req, res, next) {
     // Save session
     req.session.user = {
       id: user._id,
+      first_name: user.account_firstname,
+      last_name: user.account_lastname,
       email: user.account_email,
       role: user.account_type
     };
+
+    // If they had a saved URL, redirect them there
+    if (req.session.redirectTo) {
+    const redirectUrl = req.session.redirectTo;
+    delete req.session.redirectTo; // clean up
+    return res.redirect(redirectUrl);
+    }
 
     // Role-based redirect
     if (user.account_type === "Admin" || user.account_type ==="Employee") {
@@ -168,5 +178,39 @@ async function buildManagementView(req, res, next) {
     }) 
 }
 
+async function buildAccountUpgradeView(req, res, next) {
+   let nav = await utilities.getNav()
+    res.render("account/upgradeUser", {
+      title: "User Upgrade Portal",
+      nav,
+      errors: null,
+    }) 
+}
 
-module.exports = {buildLogin, buildRegister, registerAccount, accountLogin, buildManagementView}
+async function upgradeAccount(req, res, next) {
+  let nav = await utilities.getNav();
+  const { account_email, role } = req.body;
+
+  try {
+    if (!account_email || !role) {
+      req.flash("notice", "Email and role are required.");
+      return res.redirect("/account/upgrade");
+    }
+
+    const updatedUser = await accountModel.updateAccountTypeByEmail(account_email, role);
+
+    if (!updatedUser) {
+      req.flash("notice", "No user found with that email.");
+      return res.redirect("/account/upgrade");
+    }
+
+    req.flash("success", `User ${updatedUser.account_email} upgraded to ${updatedUser.account_type}.`);
+    return res.redirect("/account/upgrade");
+  } catch (error) {
+    console.error("Upgrade error:", error);
+    req.flash("notice", "Something went wrong. Please try again.");
+    return res.redirect("/account/upgrade");
+  }
+}
+
+module.exports = {buildLogin, buildRegister, registerAccount, accountLogin, buildManagementView, buildAccountUpgradeView, upgradeAccount}

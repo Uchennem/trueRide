@@ -1,0 +1,35 @@
+.comment-form {
+  margin-bottom: 1rem;
+}
+
+.comment-textarea {
+  width: 100%;
+  height: 80px;
+  resize: vertical;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.comment-submit {
+  background: #007bff;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.comments-box {
+  max-height: 200px; /* Limit height */
+  overflow-y: auto;  /* Enable vertical scroll */
+  border: 1px solid #ddd;
+  padding: 0.5rem;
+  border-radius: 5px;
+  background: #fafafa;
+}
+
+.comment {
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #eee;
+}
